@@ -46,11 +46,14 @@
         <div id="start-screen" class="text-center">
              <p class="text-gray-700 mb-6">Elige un modo para comenzar el cuestionario.</p>
              <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                 <button onclick="startQuiz('ordered')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                 <button onclick="startQuiz('ordered', 'main')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
                     Empezar en Orden
                  </button>
-                 <button onclick="startQuiz('random')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
+                 <button onclick="startQuiz('random', 'main')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
                     Empezar Aleatorio
+                 </button>
+                 <button onclick="startQuiz('ordered', 'chatty')" class="w-full sm:w-auto bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105">
+                    Modo Chaty
                  </button>
              </div>
         </div>
@@ -252,7 +255,7 @@
                     D: "El goce de la belleza."
                 },
                 correctAnswer: "C",
-                explanation: "El más crudo, pero también el más efectivo de los métodos destinados a producir tal modificación, es el químico: la intoxicación. Los hombres saben que con ese «quitapenas» siempre podrán escapar al peso de la realidad."
+                explanation: "El más crudo, pero también el más efectivo de los métodos destinados a producir tal modification, es el químico: la intoxicación. Los hombres saben que con ese «quitapenas» siempre podrán escapar al peso de la realidad."
             },
             {
                 question: "¿Qué sabiduría oriental y práctica se menciona como método extremo para evitar el sufrimiento mediante la aniquilación de los instintos?",
@@ -553,6 +556,87 @@
             }
         ];
 
+        const chattyQuizData = [
+            {
+                question: "¿Qué amigo de Freud le habló del “sentimiento oceánico”?",
+                options: { A: "Un poeta anónimo", B: "Un amigo íntimo suyo", C: "Carl Jung", D: "Romain Rolland" },
+                correctAnswer: "D",
+                explanation: "Capítulo I: Freud cuenta que Romain Rolland le describió el 'sentimiento oceánico', un sentimiento de eternidad y unión con el todo (Freud, I)."
+            },
+            {
+                question: "¿Qué define Freud como “sentimiento oceánico”?",
+                options: { A: "Una percepción sensorial ligada al mar", B: "Un sentimiento de eternidad y unión con el todo", C: "Una experiencia estética de la belleza", D: "Una ilusión religiosa creada por la Iglesia" },
+                correctAnswer: "B",
+                explanation: "Capítulo I: Freud explica que el 'sentimiento oceánico' es la sensación de infinitud y comunión con el todo (Freud, I)."
+            },
+            {
+                question: "Según Freud, ¿cuál es el origen de la religiosidad?",
+                options: { A: "La ciencia", B: "La contemplación de la naturaleza", C: "El sentimiento oceánico", D: "El desamparo infantil y la necesidad de amparo paterno" },
+                correctAnswer: "D",
+                explanation: "Capítulo I: Freud atribuye el origen de la religiosidad al desamparo infantil y la necesidad del padre protector (Freud, I)."
+            },
+            {
+                question: "¿Qué principio rige originalmente la psique humana?",
+                options: { A: "Principio de realidad", B: "Principio del deber", C: "Principio del placer", D: "Principio de la fe" },
+                correctAnswer: "C",
+                explanation: "Capítulo II: Freud dice que el principio del placer rige el aparato psíquico desde el inicio (Freud, II)."
+            },
+            {
+                question: "¿Cuál es la fuente de los mayores sufrimientos humanos, según Freud?",
+                options: { A: "El propio cuerpo", B: "La naturaleza", C: "Las relaciones humanas", D: "Todas las anteriores" },
+                correctAnswer: "D",
+                explanation: "Capítulo II: Freud enumera tres fuentes de sufrimiento: el cuerpo, la naturaleza y las relaciones con los demás (Freud, II)."
+            },
+            {
+                question: "La cultura se opone a las relaciones humanas.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "A",
+                explanation: "Capítulo III: Freud define la cultura como los medios para proteger al hombre y regular las relaciones (Freud, III)."
+            },
+            {
+                question: "La libertad individual crece con el desarrollo cultural.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "B",
+                explanation: "Capítulo III: Freud aclara que la cultura restringe la libertad individual (Freud, III)."
+            },
+            {
+                question: "Freud llama “dios con prótesis” al hombre moderno por su dependencia de la técnica.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "A",
+                explanation: "Capítulo III: Freud se refiere al hombre moderno como un 'dios con prótesis' (Freud, III)."
+            },
+            {
+                question: "La limpieza y el orden no tienen relación con la cultura.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "B",
+                explanation: "Capítulo III: Freud explica que la limpieza y el orden son características culturales (Freud, III)."
+            },
+            {
+                question: "El derecho es una sustitución de la fuerza individual por la fuerza de la comunidad.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "A",
+                explanation: "Capítulo III: Freud define el derecho como la sustitución de la fuerza individual por la de la comunidad (Freud, III)."
+            },
+            {
+                question: "El progreso cultural siempre asegura felicidad.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "B",
+                explanation: "Capítulo III: Freud aclara que el progreso cultural no garantiza felicidad (Freud, III)."
+            },
+            {
+                question: "La cultura exige sacrificios instintivos al individuo.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "A",
+                explanation: "Capítulo III: Freud señala que la cultura impone sacrificios instintivos (Freud, III)."
+            },
+            {
+                question: "Freud considera que la hostilidad hacia la cultura es un fenómeno moderno.",
+                options: { A: "Verdadero", B: "Falso" },
+                correctAnswer: "B",
+                explanation: "Capítulo III: Freud indica que la hostilidad contra la cultura tiene raíces antiguas (Freud, III)."
+            }
+        ];
+
         // State variables
         let currentQuestionIndex = 0;
         let score = 0;
@@ -575,16 +659,18 @@
         const finalScoreEl = document.getElementById('final-score');
 
         // Functions
-        function startQuiz(mode) {
+        function startQuiz(mode, quizType = 'main') {
             currentQuestionIndex = 0;
             score = 0;
-            userAnswers = new Array(quizData.length).fill(null);
+            
+            let sourceData = quizType === 'chatty' ? chattyQuizData : quizData;
+            userAnswers = new Array(sourceData.length).fill(null);
             
             if (mode === 'random') {
-                shuffledQuestions = [...quizData].map((q, index) => ({...q, originalIndex: index}))
+                shuffledQuestions = [...sourceData].map((q, index) => ({...q, originalIndex: index}))
                                                  .sort(() => Math.random() - 0.5);
             } else {
-                shuffledQuestions = [...quizData].map((q, index) => ({...q, originalIndex: index}));
+                shuffledQuestions = [...sourceData].map((q, index) => ({...q, originalIndex: index}));
             }
 
             startScreen.classList.add('hidden');
