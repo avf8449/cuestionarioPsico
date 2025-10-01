@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario: El Malestar en la Cultura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .correct-answer {
+            background-color: #dcfce7; /* green-100 */
+            border-color: #22c55e; /* green-500 */
+            color: #166534; /* green-800 */
+        }
+        .incorrect-answer {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #ef4444; /* red-500 */
+            color: #991b1b; /* red-800 */
+        }
+        .selected-incorrect {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen p-4">
+    <div id="quiz-container" class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-8">
+        
+        <!-- Header -->
+        <header class="text-center mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-900">El Malestar en la Cultura</h1>
+            <p class="text-md text-gray-600 mt-1">Cuestionario sobre la obra de Sigmund Freud</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="text-center">
+             <p class="text-gray-700 mb-6">Elige un modo para comenzar el cuestionario.</p>
+             <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                 <button onclick="startQuiz('ordered')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                    Empezar en Orden
+                 </button>
+                 <button onclick="startQuiz('random')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
+                    Empezar Aleatorio
+                 </button>
+             </div>
+        </div>
+
+        <!-- Quiz Area -->
+        <div id="quiz-area" class="hidden">
+            <!-- Info Bar -->
+            <div class="flex justify-between items-center mb-4 text-sm font-medium">
+                <div id="progress" class="text-gray-600">Pregunta 1 de 40</div>
+                <div id="score" class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Puntuación: 0</div>
+            </div>
+
+            <!-- Question -->
+            <div id="question-card" class="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
+                <p id="question-text" class="text-lg font-semibold text-gray-800"></p>
+            </div>
+
+            <!-- Answers -->
+            <div id="answers-container" class="grid grid-cols-1 gap-3">
+                <!-- Answers will be dynamically inserted here -->
+            </div>
+
+            <!-- Explanation -->
+            <div id="explanation-container" class="hidden mt-5 border-t pt-4">
+                <p id="explanation-text" class="text-sm text-gray-700 bg-yellow-50 border border-yellow-200 rounded-lg p-4"></p>
+            </div>
+
+            <!-- Next Button -->
+            <div class="mt-6 text-center">
+                <button id="next-button" class="hidden bg-blue-600 text-white font-semibold py-2 px-8 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden text-center">
+            <h2 class="text-2xl font-bold mb-4">Cuestionario Completado</h2>
+            <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
+                <p class="text-lg text-gray-800">Tu puntuación final es:</p>
+                <p id="final-score" class="text-5xl font-extrabold text-blue-600 my-3">0 / 40</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="resetQuiz()" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
+                    Jugar de Nuevo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Según el amigo de Freud, ¿cuál es la fuente última de la religiosidad que Freud no valoró suficientemente en su estudio previo?",
+                options: {
+                    A: "La fe en la Providencia solícita.",
+                    B: "La nostalgia por la figura paterna.",
+                    C: "Un sentimiento designado como \"sensación de eternidad\" o \"oceánico\".",
+                    D: "La necesidad de evitar el sufrimiento ante el destino."
+                },
+                correctAnswer: "C",
+                explanation: "El amigo de Freud lamentaba que este no hubiera concedido su justo valor a la fuente última de la religiosidad, la cual residiría en un sentimiento que le agradaría designar «sensación de eternidad» o un sentimiento como de algo sin límites ni barreras, en cierto modo «oceánico»."
+            },
+            {
+                question: "Según la investigación psicoanalítica, ¿por qué la sensación normal del yo (unitario y bien demarcado) es engañosa?",
+                options: {
+                    A: "Porque el yo se fusiona permanentemente con el objeto amado.",
+                    B: "Porque se continúa hacia dentro, sin límites precisos, con el ello.",
+                    C: "Porque está constantemente sujeto a trastornos patológicos.",
+                    D: "Porque se somete al principio de la realidad."
+                },
+                correctAnswer: "B",
+                explanation: "Sólo la investigación psicoanalítica [...] nos ha enseñado que esa apariencia es engañosa; que, por el contrario, el yo se continúa hacia dentro, sin límites precisos, con una entidad psíquica inconsciente que denominamos ello."
+            },
+            {
+                question: "¿En qué estado, considerado extraordinario pero no patológico, amenaza con esfumarse el límite entre el yo y el objeto?",
+                options: {
+                    A: "Durante el sueño profundo.",
+                    B: "En la culminación del enamoramiento.",
+                    C: "En el estado de trance o éxtasis.",
+                    D: "Bajo los efectos de la intoxicación."
+                },
+                correctAnswer: "B",
+                explanation: "Sólo los pierde [los límites del yo] en un estado que, si bien extraordinario, no puede ser tachado de patológico: en la culminación del enamoramiento amenaza esfumarse el límite entre el yo y el objeto."
+            },
+            {
+                question: "¿Cuál es uno de los primeros estímulos que lleva al lactante a oponerle un \"objeto\" (un «afuera») al yo?",
+                options: {
+                    A: "Las sensaciones de placer proporcionadas por el propio cuerpo.",
+                    B: "La observación del mundo circundante.",
+                    C: "El hecho de que la fuente de excitación más anhelada (el seno materno) se sustrae temporalmente.",
+                    D: "El comienzo de la entronización del principio de realidad."
+                },
+                correctAnswer: "C",
+                explanation: "El lactante lo aprende [a discernir su yo de un mundo exterior] [...] El hecho de que algunas de las fuentes de excitación sean susceptibles de provocarle sensaciones en cualquier momento, mientras que otras se le sustraen temporalmente -entre éstas, la que más anhela: el seno materno- [...] Con ello comienza por oponérsele al yo un «objeto»."
+            },
+            {
+                question: "¿Cómo se denomina al yo que surge de la tendencia a disociar y expulsar del yo cuanto pueda convertirse en fuente de displacer?",
+                options: {
+                    A: "Yo placentero.",
+                    B: "Yo ideal.",
+                    C: "Yo narcisista.",
+                    D: "Yo real."
+                },
+                correctAnswer: "A",
+                explanation: "Surge así la tendencia a disociar del yo cuanto pueda convertirse en fuente de displacer, a expulsarlo de sí, a formar un yo puramente hedónico, un yo placiente, enfrentado con un no-yo."
+            },
+            {
+                question: "¿Cuál es la conclusión de Freud respecto a la conservación de los estadios previos en el terreno psíquico, en comparación con el organismo animal o la evolución de una ciudad?",
+                options: {
+                    A: "La conservación de lo pretérito es posible únicamente si el órgano psíquico ha quedado intacto.",
+                    B: "La persistencia de todos los estadios previos junto a la forma definitiva es un fenómeno exclusivo del terreno psíquico.",
+                    C: "Lo psíquico siempre consume lo primitivo al evolucionar, al igual que los organismos biológicos.",
+                    D: "La conservación total solo puede darse mediante una bifurcación del curso evolutivo."
+                },
+                correctAnswer: "B",
+                explanation: "Por consiguiente, debemos someternos a la comprobación de que sólo en el terreno psíquico es posible esta persistencia de todos los estadios previos, junto a la forma definitiva, y de que no podremos representarnos gráficamente tal fenómeno."
+            },
+            {
+                question: "¿De qué necesidad imperiosa considera Freud irrefutable la derivación de las necesidades religiosas?",
+                options: {
+                    A: "El afán de goce y placer ilimitado.",
+                    B: "La búsqueda del narcisismo universal.",
+                    C: "El desamparo infantil y la nostalgia por el padre.",
+                    D: "La angustia ante la propia aniquilación."
+                },
+                correctAnswer: "C",
+                explanation: "En cuanto a las necesidades religiosas, considero irrefutable su derivación del desamparo infantil y de la nostalgia por el padre que aquél suscita."
+            },
+            {
+                question: "¿A qué se refería principalmente el estudio de Freud, \"El porvenir de una ilusión\", en contraste con el \"sentimiento oceánico\"?",
+                options: {
+                    A: "A la génesis del sentimiento de culpabilidad.",
+                    B: "A la lucha entre Eros y Tánatos.",
+                    C: "A la religión tal como la concibe el hombre común (doctrinas y promisiones).",
+                    D: "A las técnicas de yoga para despertar sensaciones primordiales."
+                },
+                correctAnswer: "C",
+                explanation: "Mi estudio sobre El porvenir de una ilusión, lejos de estar dedicado principalmente a las fuentes más profundas del sentido religioso, se refería más bien a lo que el hombre común concibe como su religión, al sistema de doctrinas y promisiones."
+            },
+            {
+                question: "¿Qué aspiración expresan los hombres en su conducta y qué pretenden alcanzar en la vida, según Freud?",
+                options: {
+                    A: "El dominio de la Naturaleza.",
+                    B: "La felicidad.",
+                    C: "La superación del desamparo infantil.",
+                    D: "La regulación de las relaciones sociales."
+                },
+                correctAnswer: "B",
+                explanation: "Abandonemos por ello la cuestión precedente y encaremos esta otra más modesta: ¿qué fines y propósitos de vida expresan los hombres en su propia conducta; qué esperan de la vida, qué pretenden alcanzar en ella? Es difícil equivocar la respuesta: aspiran a la felicidad, quieren llegar a ser felices, no quieren dejar de serlo."
+            },
+            {
+                question: "¿Por qué el programa del principio del placer, que rige el objetivo vital, es considerado irrealizable?",
+                options: {
+                    A: "Porque el yo se opone al ello.",
+                    B: "Porque todo el orden del universo se opone a él.",
+                    C: "Porque la neurosis frustra las satisfacciones.",
+                    D: "Porque el hombre no aspira realmente a la felicidad."
+                },
+                correctAnswer: "B",
+                explanation: "Este programa ni siquiera es realizable, pues todo el orden del universo se le opone, y aun estaríamos por afirmar que el plan de la «Creación» no incluye el propósito de que el hombre sea «feliz»."
+            },
+            {
+                question: "¿En qué sentido estricto surge lo que se llama felicidad, de acuerdo con Freud?",
+                options: {
+                    A: "De la moderación de los instintos bajo el principio de realidad.",
+                    B: "De la satisfacción, casi siempre instantánea, de necesidades acumuladas que han alcanzado elevada tensión.",
+                    C: "De la sensación de tibio bienestar que proporciona lo estable.",
+                    D: "De la superación del sufrimiento social."
+                },
+                correctAnswer: "B",
+                explanation: "Lo que en el sentido más estricto se llama felicidad, surge de la satisfacción, casi siempre instantánea, de necesidades acumuladas que han alcanzado elevada tensión, y de acuerdo con esta índole sólo puede darse como fenómeno episódico."
+            },
+            {
+                question: "¿Cuáles son las tres fuentes de sufrimiento que amenazan al ser humano, según Freud?",
+                options: {
+                    A: "La frustración cultural, el ello, y la conciencia moral.",
+                    B: "El propio cuerpo, el mundo exterior y las relaciones con otros seres humanos.",
+                    C: "El destino, la Naturaleza y el temor al Super-yo.",
+                    D: "El principio del placer, el principio de realidad y la insuficiencia de la sociedad."
+                },
+                correctAnswer: "B",
+                explanation: "El sufrimiento nos amenaza por tres lados: desde el propio cuerpo...; del mundo exterior...; por fin, de las relaciones con otros seres humanos."
+            },
+            {
+                question: "¿Cuál es el método de protección contra el sufrimiento considerado por Freud como el más crudo y efectivo, actuando químicamente sobre el organismo?",
+                options: {
+                    A: "La aniquilación de los instintos (Yoga).",
+                    B: "El aislamiento voluntario.",
+                    C: "La intoxicación (uso de narcóticos).",
+                    D: "El goce de la belleza."
+                },
+                correctAnswer: "C",
+                explanation: "El más crudo, pero también el más efectivo de los métodos destinados a producir tal modificación, es el químico: la intoxicación. Los hombres saben que con ese «quitapenas» siempre podrán escapar al peso de la realidad."
+            },
+            {
+                question: "¿Qué sabiduría oriental y práctica se menciona como método extremo para evitar el sufrimiento mediante la aniquilación de los instintos?",
+                options: {
+                    A: "La meditación trascendental.",
+                    B: "La práctica del Yoga.",
+                    C: "El budismo.",
+                    D: "El ascetismo."
+                },
+                correctAnswer: "B",
+                explanation: "Esta forma de evitar el dolor [...] trata de dominar las mismas fuentes internas de nuestras necesidades, consiguiéndolo en grado extremo al aniquilar los instintos, como lo enseña la sabiduría oriental y lo realiza la práctica del yoga."
+            },
+            {
+                question: "¿Por qué la satisfacción de una pulsión instintiva indómita, no sujeta por las riendas del yo, tiene un carácter irresistible?",
+                options: {
+                    A: "Porque el principio de la realidad exige la satisfacción inmediata.",
+                    B: "Porque su sentimiento de felicidad es incomparablemente más intenso.",
+                    C: "Porque el Super-yo no puede ejercer su censura.",
+                    D: "Porque es la única técnica que garantiza la felicidad."
+                },
+                correctAnswer: "B",
+                explanation: "[...] el sentimiento de felicidad experimentado al satisfacer una pulsión instintiva indómita, no sujeta por las riendas del yo, es incomparablemente más intenso que el que se siente al saciar un instinto dominado."
+            },
+            {
+                question: "¿Cuál es el punto débil del método de sublimación (como en el arte o la ciencia) para evitar el sufrimiento?",
+                options: {
+                    A: "Que su intensidad es muy atenuada en comparación con los impulsos primarios.",
+                    B: "Que fracasa cuando el propio cuerpo se convierte en fuente de dolor.",
+                    C: "Que solo es accesible a pocos seres, pues presupone aptitudes peculiares.",
+                    D: "Que las satisfacciones que ofrece son ilusiones frente a la realidad."
+                },
+                correctAnswer: "C",
+                explanation: "Pero el punto débil de este método reside en que su aplicabilidad no es general, en que sólo es accesible a pocos seres, pues presupone disposiciones y aptitudes peculiares."
+            },
+            {
+                question: "¿Cuál es la técnica de vida que hace del amor el centro de todas las cosas y deriva toda satisfacción de amar y ser amado?",
+                options: {
+                    A: "La sublimación.",
+                    B: "La intoxicación.",
+                    C: "La orientación erótica.",
+                    D: "El aislamiento voluntario."
+                },
+                correctAnswer: "C",
+                explanation: "Naturalmente, me refiero a aquella orientación de la vida que hace del amor el centro de todas las cosas, que deriva toda satisfacción del amar y ser amado."
+            },
+            {
+                question: "Según el psicoanálisis, ¿cuál es el origen de la belleza?",
+                options: {
+                    A: "Es una conquista de la cultura, esencial para la utilidad.",
+                    B: "Derivación del terreno de las sensaciones sexuales, representando una tendencia coartada en su fin.",
+                    C: "Una ilusión que se goza sin que su discrepancia con la realidad impida gozarla.",
+                    D: "Es un atributo del Super-yo que exige orden y limpieza."
+                },
+                correctAnswer: "B",
+                explanation: "Lo único seguro parece ser su derivación del terreno de las sensaciones sexuales, representando un modelo ejemplar de una tendencia coartada en su fin. Primitivamente, la «belleza» y el «encanto» son atributos del objeto sexual."
+            },
+            {
+                question: "¿Qué tipo de transformación de la realidad, adoptada colectivamente por numerosos individuos, lleva a Freud a considerar a las religiones de la Humanidad como \"delirios colectivos\"?",
+                options: {
+                    A: "Una modificación regresiva a estados psíquicos primordiales.",
+                    B: "Una transformación delirante de la realidad para obtener un seguro de felicidad y protección.",
+                    C: "La imposición de una moralidad insensata.",
+                    D: "La aniquilación de la voluntad de vivir."
+                },
+                correctAnswer: "B",
+                explanation: "Particular importancia adquiere el caso en que numerosos individuos emprenden juntos la tentativa de procurarse un seguro de felicidad y una protección contra el dolor por medio de una transformación delirante de la realidad. También las religiones de la Humanidad deben ser consideradas como semejantes delirios colectivos."
+            },
+            {
+                question: "¿Qué logra evitar la religión a muchos seres humanos al imponer la fijación a un infantilismo psíquico y la participación en un delirio colectivo?",
+                options: {
+                    A: "El sufrimiento emanado de la naturaleza.",
+                    B: "La rebelión contra la cultura.",
+                    C: "La caída en la neurosis individual.",
+                    D: "La pérdida del objeto amado."
+                },
+                correctAnswer: "C",
+                explanation: "A este precio, imponiendo por la fuerza al hombre la fijación a un infantilismo psíquico y haciéndolo participar en un delirio colectivo, la religión logra evitar a muchos seres la caída en la neurosis individual."
+            },
+            {
+                question: "De las tres fuentes de sufrimiento, ¿cuál es la única que el hombre se niega absolutamente a aceptar, sospechando que puede ser modificada?",
+                options: {
+                    A: "El propio cuerpo (caducidad).",
+                    B: "La supremacía de la Naturaleza.",
+                    C: "La de origen social (regulación de las relaciones humanas).",
+                    D: "El temor al destino."
+                },
+                correctAnswer: "C",
+                explanation: "Muy distinta es nuestra actitud frente al tercer motivo de sufrimiento, el de origen social. Nos negamos en absoluto a aceptarlo."
+            },
+            {
+                question: "¿Cuál fue la motivación histórica para la hostilidad contra la cultura que surgió cuando se comprendió el mecanismo de las neurosis?",
+                options: {
+                    A: "La influencia de los viajes de exploración y la envidia de la vida primitiva.",
+                    B: "El reconocimiento de que el dominio de la Naturaleza no aumenta la felicidad.",
+                    C: "La comprobación de que el ser humano cae en la neurosis porque no logra soportar la frustración impuesta por la sociedad en aras de sus ideales.",
+                    D: "El triunfo del cristianismo sobre las religiones paganas."
+                },
+                correctAnswer: "C",
+                explanation: "Comprobóse así que el ser humano cae en la neurosis porque no logra soportar el grado de frustración que le impone la sociedad en aras de sus ideales de cultura."
+            },
+            {
+                question: "¿Cuáles son los dos fines principales a los que sirven las producciones e instituciones que componen la cultura?",
+                options: {
+                    A: "Satisfacer la libido y reprimir la agresión.",
+                    B: "Proteger al hombre contra la Naturaleza y regular las relaciones de los hombres entre sí.",
+                    C: "Alcanzar la perfección y garantizar la justicia.",
+                    D: "Promover el orden y la limpieza."
+                },
+                correctAnswer: "B",
+                explanation: "El término «cultura» designa la suma de las producciones e instituciones [...] que sirven a dos fines: proteger al hombre contra la Naturaleza y regular las relaciones de los hombres entre sí."
+            },
+            {
+                question: "De los primeros actos culturales (herramientas, fuego, habitaciones), ¿cuál se destaca como una hazaña excepcional y sin precedentes?",
+                options: {
+                    A: "El empleo de herramientas.",
+                    B: "La dominación del fuego.",
+                    C: "La construcción de habitaciones.",
+                    D: "La invención de la escritura."
+                },
+                correctAnswer: "B",
+                explanation: "Consignaremos como primeros actos culturales el empleo de herramientas, la dominación del fuego y la construcción de habitaciones. Entre ellos, la conquista del fuego se destaca una hazaña excepcional y sin precedentes."
+            },
+            {
+                question: "¿Cómo considera Freud a los dioses, en el contexto de las conquistas humanas de la ciencia y la técnica?",
+                options: {
+                    A: "Símbolos de la agresividad reprimida.",
+                    B: "Un recurso para evitar la neurosis colectiva.",
+                    C: "Ideales de la cultura.",
+                    D: "La expresión de la hostilidad contra la Naturaleza."
+                },
+                correctAnswer: "C",
+                explanation: "Desde hace mucho tiempo se había forjado un ideal de omnipotencia y omnisapiencia que encarnó en sus dioses, [...] de modo que bien podemos considerar a estos dioses como ideales de la cultura."
+            },
+            {
+                question: "¿A qué se refiere Freud al afirmar que el hombre \"ha llegado a ser por así decirlo, un dios con prótesis\"?",
+                options: {
+                    A: "A su capacidad para imponer orden y limpieza.",
+                    B: "A sus logros en la explotación de la tierra.",
+                    C: "A la utilización de sus artefactos y tecnología (herramientas, máquinas).",
+                    D: "A la transformación de sus instintos."
+                },
+                correctAnswer: "C",
+                explanation: "El hombre ha llegado a ser por así decirlo, un dios con prótesis: bastante magnífico cuando se coloca todos sus artefactos; pero éstos no crecen de su cuerpo y a veces aun le procuran muchos sinsabores."
+            },
+            {
+                question: "¿Qué tres manifestaciones culturales, aparte de la utilidad, espera Freud ver realizadas en un país de elevado nivel cultural, y que ocupan una posición particular?",
+                options: {
+                    A: "La religión, la ciencia y el arte.",
+                    B: "La libertad, la justicia y la ética.",
+                    C: "La belleza, el orden y la limpieza.",
+                    D: "La moralidad, el derecho y la economía."
+                },
+                correctAnswer: "C",
+                explanation: "Evidentemente, la belleza, el orden y la limpieza ocupan una posición particular entre las exigencias culturales. Nadie afirmará que son tan esenciales como el dominio de las fuerzas de la Naturaleza."
+            },
+            {
+                question: "¿De dónde copió el hombre el principio del orden para introducirlo en su vida, a pesar de su tendencia natural al descuido?",
+                options: {
+                    A: "De la voluntad del Super-yo.",
+                    B: "De la Naturaleza (la observación de las grandes cronologías siderales).",
+                    C: "De la necesidad de aprovechar al máximo el espacio y el tiempo.",
+                    D: "De los preceptos higiénicos."
+                },
+                correctAnswer: "B",
+                explanation: "[...] mientras no hemos de esperar que la limpieza reine en la Naturaleza, el orden, en cambio, se lo hemos copiado a ésta; la observación de las grandes cronologías siderales no sólo dio al hombre la pauta, sino también las primeras referencias para introducir el orden en su vida."
+            },
+            {
+                question: "¿Qué representa el paso decisivo hacia la cultura, según Freud, en relación con las fuerzas individuales?",
+                options: {
+                    A: "La internalización de la agresión.",
+                    B: "La regulación de la vida sexual.",
+                    C: "La aniquilación del principio del placer.",
+                    D: "La sustitución del poderío individual por el de la comunidad (el Derecho)."
+                },
+                correctAnswer: "D",
+                explanation: "Esta sustitución del poderío individual por el de la comunidad representa el paso decisivo hacia la cultura. Su carácter esencial reside en que los miembros de la comunidad restringen sus posibilidades de satisfacción."
+            },
+            {
+                question: "¿Cuál es el primer requisito cultural, entendido como la seguridad de que el orden jurídico no será violado a favor de un individuo?",
+                options: {
+                    A: "La libertad.",
+                    B: "La moralidad.",
+                    C: "La justicia.",
+                    D: "La igualdad."
+                },
+                correctAnswer: "C",
+                explanation: "Así, pues, el primer requisito cultural es el de la justicia, o sea, la seguridad de que el orden jurídico, una vez establecido, ya no será violado a favor de un individuo."
+            },
+            {
+                question: "¿Cómo valora Freud la libertad individual en el contexto de la cultura?",
+                options: {
+                    A: "Es un bien esencial y promovido por la cultura.",
+                    B: "Era máxima antes de toda cultura, pero carecía de valor porque el individuo no podía defenderla.",
+                    C: "Es el fin último de la evolución cultural.",
+                    D: "Es la causa principal del sentimiento de culpabilidad."
+                },
+                correctAnswer: "B",
+                explanation: "La libertad individual no es un bien de la cultura, pues era máxima antes de toda cultura, aunque entonces carecía de valor porque el individuo apenas era capaz de defenderla."
+            },
+            {
+                question: "¿Qué fenómeno del desarrollo individual, relacionado con el erotismo anal, utiliza Freud como ejemplo de la analogía entre el proceso de la cultura y la evolución libidinal del individuo?",
+                options: {
+                    A: "La represión de los impulsos perversos.",
+                    B: "La formación del complejo de Edipo.",
+                    C: "La transformación del interés por la función excretora en ahorro, orden y limpieza.",
+                    D: "La internalización de la agresión en el Super-yo."
+                },
+                correctAnswer: "C",
+                explanation: "El erotismo anal del niño nos ofrece el más curioso ejemplo de tal proceso. En el curso del crecimiento, su primitivo interés por la función excretora [...] se transforma en el grupo de rasgos que conocemos como ahorro, sentido del orden y limpieza [...] Aquí se nos presenta por vez primera la analogía entre el proceso de la cultura y la evolución libidinal del individuo."
+            },
+            {
+                question: "De los mecanismos que operan sobre los instintos, ¿cuál es el que Freud considera el más importante para la cultura, ya que sobre él reposa la cultura misma?",
+                options: {
+                    A: "El desplazamiento de la libido.",
+                    B: "La sublimación de los instintos.",
+                    C: "La renuncia a las satisfacciones instintuales (frustración cultural).",
+                    D: "La transformación de la agresión."
+                },
+                correctAnswer: "C",
+                explanation: "Por fin, hallamos junto a estos dos mecanismos un tercero, que nos parece el más importante, pues es forzoso reconocer la medida en que la cultura reposa sobre la renuncia a las satisfacciones instintuales."
+            },
+            {
+                question: "¿Qué dos instancias poderosas se convirtieron en los \"padres\" de la cultura humana?",
+                options: {
+                    A: "Yo y Super-yo.",
+                    B: "Ello y Yo.",
+                    C: "Eros y Ananké (amor y necesidad).",
+                    D: "Agresión y Sexualidad."
+                },
+                correctAnswer: "C",
+                explanation: "De tal manera, Eros y Ananké (amor y necesidad) se convirtieron en los padres de la cultura humana, cuyo primer resultado fue el de facilitar la vida en común a mayor número de seres."
+            },
+            {
+                question: "¿Cuál es la actitud general de las mujeres frente a la cultura, una vez que la obra cultural se convierte en tarea masculina?",
+                options: {
+                    A: "De intensa colaboración.",
+                    B: "De adopción de la sublimación.",
+                    C: "De oposición, ejerciendo una influencia dilatoria y conservadora.",
+                    D: "De búsqueda de nuevas formas de amor genital."
+                },
+                correctAnswer: "C",
+                explanation: "La siguiente discordia es causada por las mujeres, que no tardan en oponerse a la corriente cultural, ejerciendo su influencia dilatoria y conservadora. Las mujeres representan los intereses de la familia y de la vida sexual."
+            },
+            {
+                question: "¿Cuál es la única relación sexual que la cultura europea occidental actual está dispuesta a tolerar?",
+                options: {
+                    A: "Toda relación que cumpla con el precepto de amar al prójimo.",
+                    B: "El amor de fin inhibido o cariño.",
+                    C: "Las relaciones basadas en la unión única e indisoluble entre un hombre y una mujer.",
+                    D: "Cualquier satisfacción extragenital que no sea dañina."
+                },
+                correctAnswer: "C",
+                explanation: "La cultura actual nos da claramente a entender que sólo está dispuesta a tolerar las relaciones sexuales basadas en la unión única e indisoluble entre un hombre y una mujer."
+            },
+            {
+                question: "¿Cómo se traduce con mayor claridad el núcleo de la esencia del Eros, su propósito de fundir varios seres en uno solo, en el enamoramiento de dos personas?",
+                options: {
+                    A: "Como la necesidad de procrear.",
+                    B: "Como la sustracción de energía a la sexualidad.",
+                    C: "En el hecho de que ambos amantes se bastan a sí mismos y no subsiste interés alguno por el mundo exterior.",
+                    D: "En la búsqueda de un amor universal."
+                },
+                correctAnswer: "C",
+                explanation: "En ningún caso, como en éste [la culminación de una relación amorosa], el Eros traduce con mayor claridad el núcleo de su esencia, su propósito de fundir varios seres en uno solo; pero se resiste a ir más lejos, una vez alcanzado este fin, de manera proverbial, en el enamoramiento de dos personas."
+            },
+            {
+                question: "¿Cuál es la disposición instintiva innata y autónoma del ser humano que Freud considera el mayor obstáculo con que tropieza la cultura?",
+                options: {
+                    A: "La tendencia sexual.",
+                    B: "La tendencia narcisista.",
+                    C: "La tendencia agresiva.",
+                    D: "La tendencia de repetición."
+                },
+                correctAnswer: "C",
+                explanation: "adoptaré, pues, el punto de vista de que la tendencia agresiva es una disposición instintiva innata y autónoma del ser humano; además, retomo ahora mi afirmación de que aquélla constituye el mayor obstáculo con que tropieza la cultura."
+            },
+            {
+                question: "¿Por qué considera Freud que la hipótesis psicológica del comunismo (que al abolir la propiedad privada desaparecería la hostilidad) es una vana ilusión?",
+                options: {
+                    A: "Porque la agresividad se dirigiría entonces contra las mujeres.",
+                    B: "Porque el instinto agresivo no es una consecuencia de la propiedad.",
+                    C: "Porque la cultura no puede funcionar sin la ley y la justicia.",
+                    D: "Porque el hombre es bueno de corazón."
+                },
+                correctAnswer: "B",
+                explanation: "No me concierne la crítica económica del sistema comunista; [...] pero, en cambio, puedo reconocer como vana ilusión su hipótesis psicológica. Es verdad que al abolir la propiedad privada se sustrae a la agresividad humana uno de sus instrumentos, [...] pero de ningún modo el más fuerte de todos. El instinto agresivo no es una consecuencia de la propiedad."
+            },
+            {
+                question: "¿Qué fenómeno describe Freud como un medio para satisfacer, cómoda y más o menos inofensivamente, las tendencias agresivas y facilitar la cohesión entre los miembros de la comunidad?",
+                options: {
+                    A: "La intolerancia religiosa.",
+                    B: "El narcisismo de las pequeñas diferencias.",
+                    C: "La fuga a la neurosis.",
+                    D: "La persecución de las minorías."
+                },
+                correctAnswer: "B",
+                explanation: "Denominé a este fenómeno narcisismo de las pequeñas diferencias, aunque tal término escasamente contribuye a explicarlo. Podemos considerarlo como un medio para satisfacer, cómoda y más o menos inofensivamente, las tendencias agresivas, facilitándose así la cohesión entre los miembros de la comunidad."
+            }
+        ];
+
+        // State variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let shuffledQuestions = [];
+        let answerSelected = false;
+
+        // DOM elements
+        const startScreen = document.getElementById('start-screen');
+        const quizArea = document.getElementById('quiz-area');
+        const resultsScreen = document.getElementById('results-screen');
+        
+        const progressEl = document.getElementById('progress');
+        const scoreEl = document.getElementById('score');
+        const questionTextEl = document.getElementById('question-text');
+        const answersContainerEl = document.getElementById('answers-container');
+        const explanationContainerEl = document.getElementById('explanation-container');
+        const explanationTextEl = document.getElementById('explanation-text');
+        const nextButton = document.getElementById('next-button');
+        const finalScoreEl = document.getElementById('final-score');
+
+        // Functions
+        function startQuiz(mode) {
+            currentQuestionIndex = 0;
+            score = 0;
+            answerSelected = false;
+            
+            if (mode === 'random') {
+                shuffledQuestions = [...quizData].sort(() => Math.random() - 0.5);
+            } else {
+                shuffledQuestions = [...quizData];
+            }
+
+            startScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
+            quizArea.classList.remove('hidden');
+            
+            updateScoreDisplay();
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            answerSelected = false;
+            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            
+            progressEl.textContent = `Pregunta ${currentQuestionIndex + 1} de ${shuffledQuestions.length}`;
+            questionTextEl.textContent = currentQuestion.question;
+            
+            answersContainerEl.innerHTML = '';
+            for (const key in currentQuestion.options) {
+                const option = currentQuestion.options[key];
+                const button = document.createElement('button');
+                button.innerHTML = `<div class="flex items-center">
+                    <div class="bg-gray-200 text-gray-700 font-bold rounded-md w-8 h-8 flex items-center justify-center mr-4">${key}</div>
+                    <div class="text-left">${option}</div>
+                </div>`;
+                button.classList.add('p-3', 'border-2', 'border-gray-300', 'rounded-lg', 'hover:bg-gray-100', 'hover:border-blue-400', 'transition-colors', 'text-gray-800', 'w-full');
+                button.dataset.answer = key;
+                button.addEventListener('click', () => selectAnswer(button, key));
+                answersContainerEl.appendChild(button);
+            }
+
+            explanationContainerEl.classList.add('hidden');
+            nextButton.classList.add('hidden');
+        }
+
+        function selectAnswer(selectedButton, selectedAnswer) {
+            if (answerSelected) return;
+            answerSelected = true;
+
+            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswer === currentQuestion.correctAnswer;
+
+            if (isCorrect) {
+                score++;
+                selectedButton.classList.add('correct-answer');
+            } else {
+                selectedButton.classList.add('incorrect-answer', 'selected-incorrect');
+            }
+            
+            Array.from(answersContainerEl.children).forEach(button => {
+                if (button.dataset.answer === currentQuestion.correctAnswer) {
+                    button.classList.remove('hover:bg-gray-100', 'hover:border-blue-400');
+                    button.classList.add('correct-answer');
+                }
+                button.disabled = true;
+            });
+
+            explanationTextEl.innerHTML = `<strong>Explicación:</strong> ${currentQuestion.explanation}`;
+            explanationContainerEl.classList.remove('hidden');
+            updateScoreDisplay();
+
+            if (currentQuestionIndex < shuffledQuestions.length - 1) {
+                nextButton.textContent = "Siguiente Pregunta";
+                nextButton.classList.remove('hidden');
+            } else {
+                nextButton.textContent = "Ver Resultados Finales";
+                nextButton.classList.remove('hidden');
+            }
+        }
+        
+        function showNextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizArea.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+            finalScoreEl.textContent = `${score} / ${shuffledQuestions.length}`;
+        }
+        
+        function updateScoreDisplay() {
+            scoreEl.textContent = `Puntuación: ${score}`;
+        }
+        
+        function resetQuiz() {
+            resultsScreen.classList.add('hidden');
+            quizArea.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            score = 0;
+            currentQuestionIndex = 0;
+            updateScoreDisplay();
+        }
+
+        // Event listeners
+        nextButton.addEventListener('click', showNextQuestion);
+    </script>
+</body>
+</html>
