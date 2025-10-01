@@ -44,17 +44,30 @@
 
         <!-- Start Screen -->
         <div id="start-screen" class="text-center">
-             <p class="text-gray-700 mb-6">Elige un modo para comenzar el cuestionario.</p>
-             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                 <button onclick="startQuiz('ordered', 'main')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
-                    Empezar en Orden
-                 </button>
-                 <button onclick="startQuiz('random', 'main')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
-                    Empezar Aleatorio
-                 </button>
-                 <button onclick="startQuiz('ordered', 'chatty')" class="w-full sm:w-auto bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105">
-                    Modo Chaty
-                 </button>
+             <p class="text-gray-700 mb-8">Elige un modo para comenzar el cuestionario.</p>
+             <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Cuestionario Principal</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                         <button onclick="startQuiz('ordered', 'main')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                            Empezar en Orden
+                         </button>
+                         <button onclick="startQuiz('random', 'main')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
+                            Empezar Aleatorio
+                         </button>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Cuestionario Chaty</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                         <button onclick="startQuiz('ordered', 'chatty')" class="w-full sm:w-auto bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105">
+                            Modo Chaty
+                         </button>
+                         <button onclick="startQuiz('random', 'chatty')" class="w-full sm:w-auto bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-teal-800 transition-transform transform hover:scale-105">
+                            Chaty Aleatorio
+                         </button>
+                    </div>
+                </div>
              </div>
         </div>
 
@@ -557,85 +570,38 @@
         ];
 
         const chattyQuizData = [
-            {
-                question: "¿Qué amigo de Freud le habló del “sentimiento oceánico”?",
-                options: { A: "Un poeta anónimo", B: "Un amigo íntimo suyo", C: "Carl Jung", D: "Romain Rolland" },
-                correctAnswer: "D",
-                explanation: "Capítulo I: Freud cuenta que Romain Rolland le describió el 'sentimiento oceánico', un sentimiento de eternidad y unión con el todo (Freud, I)."
-            },
-            {
-                question: "¿Qué define Freud como “sentimiento oceánico”?",
-                options: { A: "Una percepción sensorial ligada al mar", B: "Un sentimiento de eternidad y unión con el todo", C: "Una experiencia estética de la belleza", D: "Una ilusión religiosa creada por la Iglesia" },
-                correctAnswer: "B",
-                explanation: "Capítulo I: Freud explica que el 'sentimiento oceánico' es la sensación de infinitud y comunión con el todo (Freud, I)."
-            },
-            {
-                question: "Según Freud, ¿cuál es el origen de la religiosidad?",
-                options: { A: "La ciencia", B: "La contemplación de la naturaleza", C: "El sentimiento oceánico", D: "El desamparo infantil y la necesidad de amparo paterno" },
-                correctAnswer: "D",
-                explanation: "Capítulo I: Freud atribuye el origen de la religiosidad al desamparo infantil y la necesidad del padre protector (Freud, I)."
-            },
-            {
-                question: "¿Qué principio rige originalmente la psique humana?",
-                options: { A: "Principio de realidad", B: "Principio del deber", C: "Principio del placer", D: "Principio de la fe" },
-                correctAnswer: "C",
-                explanation: "Capítulo II: Freud dice que el principio del placer rige el aparato psíquico desde el inicio (Freud, II)."
-            },
-            {
-                question: "¿Cuál es la fuente de los mayores sufrimientos humanos, según Freud?",
-                options: { A: "El propio cuerpo", B: "La naturaleza", C: "Las relaciones humanas", D: "Todas las anteriores" },
-                correctAnswer: "D",
-                explanation: "Capítulo II: Freud enumera tres fuentes de sufrimiento: el cuerpo, la naturaleza y las relaciones con los demás (Freud, II)."
-            },
-            {
-                question: "La cultura se opone a las relaciones humanas.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "A",
-                explanation: "Capítulo III: Freud define la cultura como los medios para proteger al hombre y regular las relaciones (Freud, III)."
-            },
-            {
-                question: "La libertad individual crece con el desarrollo cultural.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "B",
-                explanation: "Capítulo III: Freud aclara que la cultura restringe la libertad individual (Freud, III)."
-            },
-            {
-                question: "Freud llama “dios con prótesis” al hombre moderno por su dependencia de la técnica.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "A",
-                explanation: "Capítulo III: Freud se refiere al hombre moderno como un 'dios con prótesis' (Freud, III)."
-            },
-            {
-                question: "La limpieza y el orden no tienen relación con la cultura.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "B",
-                explanation: "Capítulo III: Freud explica que la limpieza y el orden son características culturales (Freud, III)."
-            },
-            {
-                question: "El derecho es una sustitución de la fuerza individual por la fuerza de la comunidad.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "A",
-                explanation: "Capítulo III: Freud define el derecho como la sustitución de la fuerza individual por la de la comunidad (Freud, III)."
-            },
-            {
-                question: "El progreso cultural siempre asegura felicidad.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "B",
-                explanation: "Capítulo III: Freud aclara que el progreso cultural no garantiza felicidad (Freud, III)."
-            },
-            {
-                question: "La cultura exige sacrificios instintivos al individuo.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "A",
-                explanation: "Capítulo III: Freud señala que la cultura impone sacrificios instintivos (Freud, III)."
-            },
-            {
-                question: "Freud considera que la hostilidad hacia la cultura es un fenómeno moderno.",
-                options: { A: "Verdadero", B: "Falso" },
-                correctAnswer: "B",
-                explanation: "Capítulo III: Freud indica que la hostilidad contra la cultura tiene raíces antiguas (Freud, III)."
-            }
+            { question: "En los estudios iniciales de Freud, ¿cuál era la polaridad instintiva planteada para designar las pulsiones amorosas dirigidas a objetos?", options: { A: "Principio del Placer vs. Principio de la Realidad.", B: "Yo vs. Super-yo.", C: "Instintos del yo vs. Instintos objetales (libidinales).", D: "Eros vs. Instinto de Muerte." }, correctAnswer: "C", explanation: "Así, desde un principio se me presentaron en mutua oposición los instintos del yo y los instintos objetales. Para designar la energía de los últimos, y exclusivamente para ella, introduje el término libido, con esto la polaridad quedó planteada entre los instintos del yo y los instintos libidinales, dirigidos a objetos." },
+            { question: "¿Cómo se manifiesta el hipotético instinto de muerte una vez que se orienta contra el mundo exterior?", options: { A: "Como libido narcisista.", B: "Como complejo de Edipo.", C: "Como impulso de agresión y destrucción.", D: "Como sentimiento de culpabilidad." }, correctAnswer: "C", explanation: "Progresé algo más, aceptando que una parte de este instinto se orienta contra el mundo exterior, manifestándose entonces como impulso de agresión y destrucción." },
+            { question: "¿Qué representan el sadismo y el masoquismo en términos de la teoría dual de los instintos (Eros y Muerte)?", options: { A: "Formas de satisfacer la pulsión de autoconservación.", B: "Amalgamas entre el impulso amoroso y el instinto de destrucción.", C: "Manifestaciones puras del instinto de muerte.", D: "La lucha entre el yo y la sexualidad." }, correctAnswer: "B", explanation: "En el sadismo [...] nos encontraríamos con semejante amalgama particularmente sólida entre el impulso amoroso y el instinto de destrucción; lo mismo sucede con su símil antagónico, el masoquismo." },
+            { question: "¿Cuál es el proceso clave por el cual la cultura domina la inclinación agresiva del individuo, según el psicoanálisis?", options: { A: "La represión de la sexualidad.", B: "La sublimación del instinto agresivo.", C: "La internalización de la agresión y su transformación en el Super-yo.", D: "La promulgación del Derecho." }, correctAnswer: "C", explanation: "La agresión es introyectada, internalizada, devuelta en realidad al lugar de donde procede: es dirigida contra el propio yo, incorporándose a una parte de éste, que en calidad de super-yo se opone a la parte restante, y asumiendo la función de «conciencia»." },
+            { question: "¿Cómo se califica la tensión creada entre el Super-yo severo y el yo subordinado al mismo?", options: { A: "Principio de la realidad.", B: "Sentimiento de culpabilidad.", C: "Narcisismo primario.", D: "Angustia de castración." }, correctAnswer: "B", explanation: "La tensión creada entre el severo super-yo y el yo subordinado al mismo la calificamos de sentimiento de culpabilidad." },
+            { question: "¿Qué factor es el que originalmente establece lo que debe considerarse como \"bueno\" y como \"malo\", ya que el hombre carece de una facultad natural de discernimiento moral?", options: { A: "La naturaleza ineludible del sufrimiento.", B: "Una influencia ajena y externa.", C: "La herencia filogenética.", D: "El principio del placer." }, correctAnswer: "B", explanation: "Aquí se manifiesta, pues, una influencia ajena y externa, destinada a establecer lo que debe considerarse como bueno y como malo." },
+            { question: "En su fase más primitiva (infantil), ¿a qué se reduce el sentimiento de culpabilidad, antes de la internalización de la autoridad?", options: { A: "Miedo al ello.", B: "Miedo a la pérdida del amor (angustia «social»).", C: "Temor a la aniquilación del cuerpo.", D: "Remordimiento por una mala acción." }, correctAnswer: "B", explanation: "A semejante estado lo llamamos «mala conciencia», pero en el fondo no le conviene tal nombre, pues en este nivel el sentimiento de culpabilidad no es, sin duda alguna, más que un temor ante la pérdida del amor, es decir, angustia «social»." },
+            { question: "¿Qué particularidad paradójica presenta la conciencia moral una vez que la autoridad es internalizada en el Super-yo?", options: { A: "Se vuelve más indulgente cuanto más desgraciado es el hombre.", B: "Se comporta tanto más severa cuanto más virtuoso es el hombre.", C: "Se conforma con la renuncia a la satisfacción de los instintos.", D: "Pierde su relación con el miedo al castigo." }, correctAnswer: "B", explanation: "En efecto, se comporta tanto más severa y desconfiadamente cuanto más virtuoso es el hombre, de modo que, en última instancia, quienes han llegado más lejos por el camino de la santidad son precisamente los que se acusan de la peor pecaminosidad." },
+            { question: "Según la hipótesis filogenética (historia de la especie), ¿de qué acontecimiento se supone que procede el sentimiento de culpabilidad de la especie humana?", options: { A: "La institución de la propiedad privada.", B: "La primera prohibición sexual (tabú).", C: "La sumisión al principio de realidad.", D: "El complejo de Edipo y el asesinato del protopadre." }, correctAnswer: "D", explanation: "No podemos eludir la suposición de que el sentimiento de culpabilidad de la especie humana procede del complejo de Edipo y fue adquirido al ser asesinado el padre por la coalición de los hermanos." },
+            { question: "¿Qué distingue al \"remordimiento\" del sentimiento de culpabilidad en general, en el contexto de las \"faltas cotidianas\"?", options: { A: "El remordimiento es inconsciente, mientras que la culpa es consciente.", B: "El remordimiento se refiere a un hecho dado (una falta cometida) y presupone una conciencia moral previa.", C: "El remordimiento siempre es consecuencia de la agresión suprimida.", D: "El remordimiento es el miedo a la autoridad, y la culpa el miedo al Super-yo." }, correctAnswer: "B", explanation: "Si alguien tiene un sentimiento de culpabilidad después de haber cometido alguna falta, y precisamente a causa de ésta, tal sentimiento debería llamarse, más bien, remordimiento. Sólo se refiere a un hecho dado, y, naturalmente, presupone que antes del mismo haya existido una disposición a sentirse culpable, es decir, una conciencia moral." },
+            { question: "Según una idea enteramente propia del psicoanálisis, ¿cuál es la relación posterior entre la renuncia instintual y la conciencia moral, invirtiendo la relación inicial?", options: { A: "Toda nueva satisfacción instintual aumenta la severidad de la conciencia.", B: "La conciencia moral se atenúa con cada renuncia instintual.", C: "Toda renuncia instintual se convierte en una fuente dinámica de la conciencia moral, aumentando su severidad.", D: "La conciencia moral se disuelve en el ello." }, correctAnswer: "C", explanation: "[...] esta situación se invierte: toda renuncia instintual se convierte entonces en una fuente dinámica de la conciencia moral; toda nueva renuncia a la satisfacción aumenta su severidad y su intolerancia." },
+            { question: "¿Qué dos planos o fases se superponen en el sentimiento de culpabilidad, dificultando su comprensión?", options: { A: "El narcisista y el libidinal.", B: "El preconsciente y el inconsciente.", C: "El derivado del miedo a la autoridad exterior y el producido por el temor ante la interior (Super-yo).", D: "El que emana del remordimiento y el que emana de la agresión contenida." }, correctAnswer: "C", explanation: "La superposición de estos dos planos del sentimiento de culpabilidad -el derivado del miedo a la autoridad exterior y el producido por el temor ante la interior- nos ha dificultado a menudo la comprensión de las relaciones de la conciencia moral." },
+            { question: "¿Cómo puede ser definida brevemente la evolución cultural, al revelarse su sentido como la lucha entre los protoinstintos?", options: { A: "Como la lucha de la especie humana por la vida.", B: "Como el proceso de la deificación del hombre.", C: "Como la internalización de las exigencias sociales.", D: "Como la renuncia progresiva a la felicidad." }, correctAnswer: "A", explanation: "Ahora, creo, el sentido de la evolución cultural ya no nos resultará impenetrable; por fuerza debe presentarnos la lucha entre Eros y muerte, instinto de vida e instinto de destrucción, tal como se lleva a cabo en la especie humana. Esta lucha es, en suma, el contenido esencial de la misma, y por ello la evolución cultural puede ser definida brevemente como la lucha de la especie humana por la vida." },
+            { question: "¿Cómo debe ser concebida la ética por el psicoanálisis, dado que aborda el punto más vulnerable de toda cultura?", options: { A: "Como una justificación de las ilusiones.", B: "Como una tentativa terapéutica.", C: "Como una expresión del narcisismo colectivo.", D: "Como una consecuencia inevitable de la renuncia instintual." }, correctAnswer: "B", explanation: "Por consiguiente, debe ser concebida como una tentativa terapéutica, como un ensayo destinado a lograr mediante un imperativo del super-yo lo que antes no pudo alcanzar la restante labor cultural." },
+            { question: "¿Qué error comete el Super-yo cultural al imponer el mandamiento \"Amarás al prójimo como a ti mismo\"?", options: { A: "Presupone que la Naturaleza es completamente dominada.", B: "Descuida que el individuo es inherentemente bueno.", C: "Asume que el yo goza de ilimitada autoridad sobre su ello (actitud antipsicológica).", D: "Confunde la agresión con la sexualidad." }, correctAnswer: "C", explanation: "Acepta, más bien, que al yo del hombre le es psicológicamente posible realizar cuanto se le encomiende; que el yo goza de ilimitada autoridad sobre su ello. He aquí un error. El mandamiento \"Amarás al prójimo como a ti mismo\" es el rechazo más intenso de la agresividad humana y constituye un excelente ejemplo de la actitud antipsicológica que adopta el super-yo cultural." },
+            { question: "¿Cuál es el objetivo más importante del proceso de la cultura, en contraste con el objetivo primordial de la evolución individual?", options: { A: "La unificación de individuos aislados para formar una comunidad libidinalmente vinculada.", B: "La persecución de la felicidad individual (el fin egoísta).", C: "La completa dominación de la Naturaleza.", D: "La aniquilación del instinto de muerte." }, correctAnswer: "A", explanation: "El objetivo de establecer una unidad formada por individuos humanos es, con mucho, el más importante [para la cultura], mientras que el de la felicidad individual, aunque todavía subsiste, es desplazado a segundo plano." },
+            { question: "¿Qué factor decidirá el destino de la especie humana en la época actual, según la conclusión final de Freud?", options: { A: "La capacidad para abolir la propiedad privada.", B: "Si el Eros logra unirse por completo a la Muerte.", C: "La capacidad para someter la vida sexual a las restricciones culturales.", D: "Si el desarrollo cultural logrará hacer frente a las perturbaciones emanadas del instinto de agresión y autodestrucción." }, correctAnswer: "D", explanation: "A mi juicio, el destino de la especie humana será decidido por la circunstancia de si -y hasta qué punto- el desarrollo cultural logrará hacer frente a las perturbaciones de la vida colectiva emanadas del instinto de agresión y de autodestrucción." },
+            { question: "En el contexto del sentimiento de culpabilidad engendrado por la cultura, ¿cómo puede expresarse este sentimiento si permanece inconsciente?", options: { A: "Como una necesidad de castigo consciente.", B: "Como una neurosis obsesiva.", C: "Como un malestar o descontento que se atribuye a otras motivaciones.", D: "Como una regresión al narcisismo primario." }, correctAnswer: "C", explanation: "[...] el sentimiento de culpabilidad engendrado por la cultura no se perciba como tal, sino que permanezca inconsciente en gran parte o se exprese como un malestar, un descontento que se trata de atribuir a otras motivaciones." },
+            { question: "Según las definiciones más precisas del Super-yo, ¿qué es el sentimiento de culpabilidad?", options: { A: "Es una de las funciones de la conciencia.", B: "Es la percepción que tiene el yo de la vigilancia impuesta por el Super-yo.", C: "Es la manifestación instintiva del yo que se ha tornado masoquista.", D: "Es el resultado directo del conflicto de ambivalencia." }, correctAnswer: "B", explanation: "El sentimiento de culpabilidad -la severidad del super-yo- equivale, pues, al rigor de la conciencia; es la percepción que tiene el yo de esta vigilancia que se le impone, es su apreciación de las tensiones entre sus propias tendencias y las exigencias del super-yo." },
+            { question: "¿Qué es la \"necesidad de castigo\" y cómo se relaciona con el Super-yo y el Yo?", options: { A: "Es la manifestación de la agresividad desplazada hacia el exterior.", B: "Es una forma de remordimiento consciente.", C: "Es la angustia subyacente a la tensión entre yo y Super-yo, que utiliza el impulso de destrucción interna para establecer un vínculo erótico con el Super-yo sádico.", D: "Es la consecuencia de la pérdida del amor parental." }, correctAnswer: "C", explanation: "[...] la angustia subyacente a todas estas relaciones, el miedo a esta instancia crítica, o sea, la necesidad de castigo, es una manifestación instintiva del yo que se ha tornado masoquista bajo la influencia del super-yo sádico; en otros términos, es una parte del impulso a la destrucción interna que posee el yo y que utiliza para establecer un vínculo erótico con el super-yo." },
+            { question: "Originalmente, ¿cuál es la causa directa de la renuncia instintual por temor a la autoridad exterior?", options: { A: "El miedo al castigo físico.", B: "El remordimiento.", C: "El miedo a perder el amor (que protege contra la agresión punitiva).", D: "La ley del talión." }, correctAnswer: "C", explanation: "Originalmente, la renuncia instintual es una consecuencia del temor a la autoridad exterior; se renuncia a satisfacciones para no perder el amor de ésta. La renuncia instintual por temor a la agresión de la autoridad exterior se reduce al miedo a perder el amor, ya que el amor protege contra la agresión punitiva." },
+            { question: "¿Por qué nuestra disposición nos impide gozar intensamente de una situación placentera si esta es estable?", options: { A: "Porque el principio de la realidad lo prohíbe.", B: "Porque nuestras facultades de felicidad están limitadas en principio por nuestra propia constitución.", C: "Porque la sexualidad coartada lo impide.", D: "Porque solo se goza intensamente el contraste." }, correctAnswer: "D", explanation: "Toda persistencia de una situación anhelada por el principio del placer sólo proporciona una sensación de tibio bienestar, pues nuestra disposición no nos permite gozar intensamente sino el contraste, pero sólo en muy escasa medida lo estable." },
+            { question: "A pesar de sus grandes similitudes, ¿cuál es la diferencia fundamental en la meta entre el proceso evolutivo del individuo y el de la cultura?", options: { A: "La individual busca la perfección, mientras que la cultural busca el orden.", B: "La individual busca la felicidad; la cultural busca el establecimiento de una unidad humana.", C: "La individual busca el amor objetal; la cultural busca el amor coartado en su fin.", D: "La individual busca el Super-yo; la cultural busca el ello." }, correctAnswer: "B", explanation: "La evolución del individuo sustenta como fin principal el programa del principio del placer, es decir, la prosecución de la felicidad [...] El objetivo de establecer una unidad formada por individuos humanos es, con mucho, el más importante [en el proceso de la cultura]." },
+            { question: "¿Qué concepto, introducido por Freud, permitió comprender que el yo también está impregnado de libido?", options: { A: "El principio de realidad.", B: "La sublimación.", C: "El narcisismo.", D: "La represión." }, correctAnswer: "C", explanation: "El factor decisivo de este progreso fue la introducción del concepto del narcisismo, es decir, el reconocimiento de que también el yo está impregnado de libido." },
+            { question: "¿A qué se inclina Freud a reducir el \"sentimiento oceánico\" en el contexto del desarrollo del yo?", options: { A: "A una ilusión religiosa.", B: "A una fase temprana del sentido yoico, más amplia y universal.", C: "A un trastorno patológico de los límites del yo.", D: "A un acto cognoscitivo intelectual." }, correctAnswer: "B", explanation: "Nuestro actual sentido yoico no es, por consiguiente, más que el residuo atrofiado de un sentimiento más amplio, aun de envergadura universal [...] Si cabe aceptar que este sentido yoico primario subsiste [...] debemos considerársele como una especie de contraposición del sentimiento yoico del adulto." },
+            { question: "¿Cuál es el propósito práctico al que sirve la capacidad adquirida de discernimiento entre lo interior y lo exterior?", options: { A: "La internalización de la autoridad.", B: "La entronización del principio del placer.", C: "Eludir las sensaciones displacenteras percibidas o amenazantes.", D: "La formación del Super-yo." }, correctAnswer: "C", explanation: "Naturalmente, esa capacidad adquirida de discernimiento sirve al propósito práctico de eludir las sensaciones displacenteras percibidas o amenazantes." },
+            { question: "Según la relación entre renuncia instintual y culpabilidad, ¿qué sucede cuando la renuncia se cumple por temor a la autoridad interior (Super-yo)?", options: { A: "La renuncia tiene efecto absolvente.", B: "Ya no tiene pleno efecto absolvente, pues el deseo prohibido persiste ante el Super-yo.", C: "El yo es recompensado con la seguridad de conservar el amor.", D: "El sentimiento de culpabilidad desaparece." }, correctAnswer: "B", explanation: "Aquí no basta la renuncia a la satisfacción de los instintos, pues el deseo correspondiente persiste y no puede ser ocultado ante el super-yo. En consecuencia, no dejará de surgir el sentimiento de culpabilidad, pese a la renuncia cumplida." },
+            { question: "¿Cuál fue la mutilación más cruenta que sufrió la vida amorosa del hombre en la primera fase cultural (totemismo)?", options: { A: "La prohibición de las satisfacciones extragenitales.", B: "La imposición de la monogamia.", C: "La prohibición de elegir un objeto incestuoso.", D: "La sustracción de energía psíquica para fines culturales." }, correctAnswer: "C", explanation: "Ya la primera fase cultural, la del totemismo, trae consigo la prohibición de elegir un objeto incestuoso, quizá la más cruenta mutilación que haya sufrido la vida amorosa del hombre en el curso de los tiempos." },
+            { question: "El concepto de ética se refiere a las normas que regulan las relaciones humanas. ¿Qué tipo de lucha interna representa la ética en la vida del individuo, según el Super-yo cultural?", options: { A: "El conflicto entre yo y ello.", B: "La lucha entre el principio del placer y el principio de realidad.", C: "La lucha para eliminar la tendencia constitucional de los hombres a agredirse mutuamente.", D: "La búsqueda de la satisfacción sexual coartada en su fin." }, correctAnswer: "C", explanation: "En efecto, la ética aborda aquel purito que es fácil reconocer como el más vulnerable de toda cultura. [...] el problema consiste en eliminar el mayor obstáculo con que tropieza la cultura: la tendencia constitucional de los hombres a agredirse mutuamente." },
+            { question: "¿Qué hecho biológico fundamental justifica el aforismo \"Homo homini lupus\" y la necesidad de restricciones culturales?", options: { A: "La superioridad del mundo exterior.", B: "La tendencia agresiva como disposición instintiva innata y autónoma del ser humano.", C: "El desamparo infantil ante la Naturaleza.", D: "La necesidad económica de la comunidad de trabajo." }, correctAnswer: "B", explanation: "[...] la verdad oculta tras de todo esto [...] es la de que el hombre no es una criatura tierna y necesitada de amor, [...] sino, por el contrario, un ser entre cuyas disposiciones instintivas también debe incluirse una buena porción de agresividad. Homo homini lupus: ¿quién se atrevería a refutar este refrán...?." }
         ];
+
 
         // State variables
         let currentQuestionIndex = 0;
@@ -840,14 +806,29 @@
             // 2. Register Service Worker
             if ('serviceWorker' in navigator) {
                 const swContent = `
-                    const CACHE_NAME = 'freud-quiz-cache-v1';
-                    // Since this is a single file app, we only need to cache the main document.
+                    const CACHE_NAME = 'freud-quiz-cache-v2'; // Updated cache name
                     const urlsToCache = ['./']; 
 
                     self.addEventListener('install', event => {
                         self.skipWaiting();
                         event.waitUntil(
                             caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    // Clean up old caches
+                    self.addEventListener('activate', event => {
+                        const cacheWhitelist = [CACHE_NAME];
+                        event.waitUntil(
+                            caches.keys().then(cacheNames => {
+                                return Promise.all(
+                                    cacheNames.map(cacheName => {
+                                        if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                            return caches.delete(cacheName);
+                                        }
+                                    })
+                                );
+                            })
                         );
                     });
 
