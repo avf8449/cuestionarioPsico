@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- PWA Manifest and Theme Color -->
     <meta name="theme-color" content="#ffffff"/>
     <link rel="manifest" id="manifest-link">
     <link rel="apple-touch-icon" href="https://placehold.co/180x180/6366f1/ffffff?text=F">
@@ -36,44 +35,51 @@
 <body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen p-4">
     <div id="quiz-container" class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-8">
         
-        <!-- Header -->
         <header class="text-center mb-6">
             <h1 class="text-2xl md:text-3xl font-bold text-gray-900">El Malestar en la Cultura</h1>
             <p class="text-md text-gray-600 mt-1">Quizz sobre la obra de Sigmund Freud</p>
         </header>
 
-        <!-- Start Screen -->
         <div id="start-screen" class="text-center">
              <p class="text-gray-700 mb-8">Elige un modo para comenzar el cuestionario.</p>
              <div class="space-y-6">
-                <div>
-                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Quizz Principal</h3>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                 <div>
+                     <h3 class="text-lg font-semibold mb-3 text-gray-800">Quizz Principal</h3>
+                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                          <button onclick="startQuiz('ordered', 'main')" class="w-full sm:w-auto bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
-                            Empezar en Orden
+                             Empezar en Orden
                          </button>
                          <button onclick="startQuiz('random', 'main')" class="w-full sm:w-auto bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 transition-transform transform hover:scale-105">
-                            Empezar Aleatorio
+                             Empezar Aleatorio
                          </button>
-                    </div>
-                </div>
-                 <div>
-                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Quizz Chaty</h3>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                     </div>
+                 </div>
+                  <div>
+                     <h3 class="text-lg font-semibold mb-3 text-gray-800">Quizz Chaty</h3>
+                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                          <button onclick="startQuiz('ordered', 'chatty')" class="w-full sm:w-auto bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition-transform transform hover:scale-105">
-                            Modo Chaty
+                             Modo Chaty
                          </button>
                          <button onclick="startQuiz('random', 'chatty')" class="w-full sm:w-auto bg-teal-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-teal-800 transition-transform transform hover:scale-105">
-                            Chaty Aleatorio
+                             Chaty Aleatorio
                          </button>
+                     </div>
+                 </div>
+                 <div>
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800">Quizz Parcial</h3>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startQuiz('ordered', 'parcial')" class="w-full sm:w-auto bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-purple-700 transition-transform transform hover:scale-105">
+                            Empezar en Orden
+                        </button>
+                        <button onclick="startQuiz('random', 'parcial')" class="w-full sm:w-auto bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-800 transition-transform transform hover:scale-105">
+                            Empezar Aleatorio
+                        </button>
                     </div>
                 </div>
              </div>
         </div>
 
-        <!-- Quiz Area -->
         <div id="quiz-area" class="hidden">
-            <!-- Info Bar -->
             <div class="flex justify-between items-center mb-4 text-sm font-medium">
                 <div id="progress" class="text-gray-600">Pregunta 1 de 40</div>
                 <div class="flex items-center gap-4">
@@ -84,33 +90,27 @@
                 </div>
             </div>
 
-            <!-- Question -->
             <div id="question-card" class="bg-gray-50 border border-gray-200 rounded-xl p-5 mb-4">
                 <p id="question-text" class="text-lg font-semibold text-gray-800"></p>
             </div>
 
-            <!-- Answers -->
             <div id="answers-container" class="grid grid-cols-1 gap-3">
-                <!-- Answers will be dynamically inserted here -->
-            </div>
+                </div>
 
-            <!-- Explanation -->
             <div id="explanation-container" class="hidden mt-5 border-t pt-4">
                 <p id="explanation-text" class="text-sm text-gray-700 bg-yellow-50 border border-yellow-200 rounded-lg p-4"></p>
             </div>
 
-            <!-- Navigation Buttons -->
             <div class="mt-6 flex justify-center gap-4">
                  <button id="prev-button" class="hidden bg-gray-500 text-white font-semibold py-2 px-8 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
-                    Anterior
-                </button>
-                <button id="next-button" class="hidden bg-blue-600 text-white font-semibold py-2 px-8 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
-                    Siguiente
-                </button>
+                     Anterior
+                 </button>
+                 <button id="next-button" class="hidden bg-blue-600 text-white font-semibold py-2 px-8 rounded-lg shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105">
+                     Siguiente
+                 </button>
             </div>
         </div>
         
-        <!-- Results Screen -->
         <div id="results-screen" class="hidden text-center">
             <h2 class="text-2xl font-bold mb-4">Cuestionario Completado</h2>
             <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
@@ -602,6 +602,283 @@
             { question: "¿Qué hecho biológico fundamental justifica el aforismo \"Homo homini lupus\" y la necesidad de restricciones culturales?", options: { A: "La superioridad del mundo exterior.", B: "La tendencia agresiva como disposición instintiva innata y autónoma del ser humano.", C: "El desamparo infantil ante la Naturaleza.", D: "La necesidad económica de la comunidad de trabajo." }, correctAnswer: "B", explanation: "[...] la verdad oculta tras de todo esto [...] es la de que el hombre no es una criatura tierna y necesitada de amor, [...] sino, por el contrario, un ser entre cuyas disposiciones instintivas también debe incluirse una buena porción de agresividad. Homo homini lupus: ¿quién se atrevería a refutar este refrán...?." }
         ];
 
+        const parcialQuizData = [
+            {
+                "question": "¿Cuál es la disposición instintiva innata y autónoma del ser humano que Freud considera el mayor obstáculo con que tropieza la cultura?",
+                "options": {
+                    "A": "La tendencia sexual.",
+                    "B": "La tendencia narcisista.",
+                    "C": "La tendencia agresiva.",
+                    "D": "La compulsión de repetición."
+                },
+                "correctAnswer": "C",
+                "explanation": "adoptaré, pues, el punto de vista de que la tendencia agresiva es una disposición instintiva innata y autónoma del ser humano; además, retomo ahora mi afirmación de que aquélla constituye el mayor obstáculo con que tropieza la cultura. [1]"
+            },
+            {
+                "question": "¿Cuál de las siguientes afirmaciones describe la función principal del Yo (Ego) dentro del modelo estructural freudiano?",
+                "options": {
+                    "A": "Actúa bajo el principio del placer y busca la gratificación inmediata.",
+                    "B": "Se rige por el proceso primario y carece de lógica o cronología.",
+                    "C": "Gobierna al Ello y al Superyó, y mantiene el equilibrio entre la realidad, los instintos y las necesidades morales.",
+                    "D": "Representa el vínculo parental y es la sede de los sentimientos de culpa inconscientes."
+                },
+                "correctAnswer": "C",
+                "explanation": "ejecutividad de la personalidad; gobierna al Ello y al Superyó y mantiene equilibrio entre la realidad, externas, intereses de la personalidad y sus necesidades. [2]"
+            },
+            {
+                "question": "¿Qué característica define el proceso psíquico que opera en el Inconsciente, según la primera tópica?",
+                "options": {
+                    "A": "Predominio del principio de realidad.",
+                    "B": "Regido por el proceso secundario.",
+                    "C": "Ausencia de cronología, espacio y el principio de no contradicción.",
+                    "D": "Contenidos susceptibles a conciencia."
+                },
+                "correctAnswer": "C",
+                "explanation": "CARACTERÍSTICAS DEL INCONSCIENTE: [...] ausencia de cronología, espacio y del principio de no contradicción. [3]"
+            },
+            {
+                "question": "Según Freud, ¿cuál es la fuente de las necesidades religiosas que él considera irrefutable?",
+                "options": {
+                    "A": "El 'sentimiento oceánico' de unidad con el Todo.",
+                    "B": "La búsqueda de la verdad metafísica.",
+                    "C": "La derivación del desamparo infantil y la nostalgia por el padre.",
+                    "D": "La sublimación de los instintos agresivos."
+                },
+                "correctAnswer": "C",
+                "explanation": "En cuanto a las necesidades religiosas, considero irrefutable su derivación del desamparo infantil y de la nostalgia por el padre que aquél suscita, tanto más cuanto que este sentimiento no se mantiene simplemente desde la infancia, sino que es reanimado sin cesar por la angustia ante la omnipotencia del destino. [4]"
+            },
+            {
+                "question": "¿Qué mecanismo del trabajo del sueño implica la concentración de varios significados o asociaciones del contenido latente en un solo elemento del contenido manifiesto?",
+                "options": {
+                    "A": "Desplazamiento.",
+                    "B": "Reelaboración.",
+                    "C": "Condensación.",
+                    "D": "Represión."
+                },
+                "correctAnswer": "C",
+                "explanation": "CONDENSACIÓN: concentración de varios significados en un solo símbolo. [5]"
+            },
+            {
+                "question": "En la Fase Fálica (3-5/6 años), ¿cuál es el fenómeno central que ocurre?",
+                "options": {
+                    "A": "La adquisición del placer por retener o expulsar heces.",
+                    "B": "La desexualización de las relaciones de objeto (Latencia).",
+                    "C": "La convergencia de tendencias sexuales hacia las zonas genitales y el surgimiento de las primeras teorías sexuales.",
+                    "D": "La oralidad incorporativa y la indiferenciación entre nutrición y placer."
+                },
+                "correctAnswer": "C",
+                "explanation": "Convergencia de tendencias sexuales hacia las zonas genitales. Descubrimiento de la diferencia sexual-anatómica, primeras teorías sexuales. [6, 7]"
+            },
+            {
+                "question": "¿Cuál fue la primera clasificación de las pulsiones propuesta por Freud (1905)?",
+                "options": {
+                    "A": "Pulsiones de vida (Eros) y Pulsiones de muerte (Tánatos).",
+                    "B": "Pulsiones narcisistas y Pulsiones objetales.",
+                    "C": "Pulsiones de autoconservación y Pulsiones sexuales.",
+                    "D": "Pulsiones pasivas y Pulsiones activas."
+                },
+                "correctAnswer": "C",
+                "explanation": "PRIMERA TEORÍA DE LAS PULSIONES (1905): Pulsiones sexuales (de la libido) y pulsiones de autoconservación. [8-10]"
+            },
+            {
+                "question": "Según Freud, ¿por qué la felicidad en el sentido estricto (satisfacción plena) solo puede darse como un fenómeno episódico?",
+                "options": {
+                    "A": "Porque está limitada por las exigencias de la cultura.",
+                    "B": "Porque el Yo se opone al principio del placer.",
+                    "C": "Porque el orden del universo se opone al programa del principio del placer y nuestra disposición solo permite gozar intensamente del contraste.",
+                    "D": "Porque el hombre está condenado a la neurosis."
+                },
+                "correctAnswer": "C",
+                "explanation": "Este programa ni siquiera es realizable, pues todo el orden del universo se le opone, y aun estaríamos por afirmar que el plan de la 'Creación' no incluye el propósito de que el hombre sea 'feliz'. [...] nuestra disposición no nos permite gozar intensamente sino el contraste, pero solo en muy escasa medida lo estable. [11], [12]"
+            },
+            {
+                "question": "De acuerdo con el modelo estructural (Segunda Tópica), ¿qué instancia psíquica surge tras la resolución del complejo de Edipo?",
+                "options": {
+                    "A": "El Ello.",
+                    "B": "El Preconsciente.",
+                    "C": "El Superyó.",
+                    "D": "La Conciencia."
+                },
+                "correctAnswer": "C",
+                "explanation": "El superyó es la instancia psíquica que surge tras la resolución del complejo de Edipo. [6, 7]"
+            },
+            {
+                "question": "El hombre ha logrado convertirse en un 'dios con prótesis' gracias a la ciencia y la técnica. A pesar de estas conquistas, Freud señala que el hombre de hoy no se siente feliz. ¿Qué tipo de adelantos fueron explícitamente negados en las fuentes como una fuente de sufrimiento en *El malestar en la cultura*?",
+                "options": {
+                    "A": "La caducidad del cuerpo.",
+                    "B": "Las relaciones con los demás.",
+                    "C": "La supremacía de la naturaleza.",
+                    "D": "Los avances tecnológicos y científicos."
+                },
+                "correctAnswer": "D",
+                "explanation": "No es una de las fuentes del sufrimiento que experimenta el hombre planteadas por Freud en 'El malestar en la cultura': Los avances tecnológicos y científicos. [8, 9]"
+            },
+            {
+                "question": "¿Cómo se llama el proceso por el cual la libido permanece ligada a modos de satisfacción, tipos de objetos o relaciones específicos de la vida sexual infantil?",
+                "options": {
+                    "A": "Regresión.",
+                    "B": "Represión.",
+                    "C": "Fijación.",
+                    "D": "Sublimación."
+                },
+                "correctAnswer": "C",
+                "explanation": "Proceso por el cual se permanece ligado a modos de satisfacción, tipos de objetos o relaciones de la vida sexual infantil: Fijación. [8, 9, 13]"
+            },
+            {
+                "question": "En la interpretación de los sueños, ¿qué tipo de contenido es el material que se recuerda y se narra al despertar?",
+                "options": {
+                    "A": "Contenido latente.",
+                    "B": "Contenido simbólico.",
+                    "C": "Contenido manifiesto.",
+                    "D": "Contenido reprimido."
+                },
+                "correctAnswer": "C",
+                "explanation": "El contenido manifiesto del sueño es el que se recuerda una vez despierto, mientras que el contenido latente es el material que hay que hallar por medio de la asociación libre. [6, 7], [14]"
+            },
+            {
+                "question": "Según el proceso de desarrollo del Yo, ¿cuál es la primera fase que se establece para la aceptación de un 'afuera' (mundo exterior)?",
+                "options": {
+                    "A": "El establecimiento de límites claros y precisos.",
+                    "B": "La disociación del yo de fuentes de displacer.",
+                    "C": "El principio de realidad.",
+                    "D": "La sensación oceánica de unidad con el Todo."
+                },
+                "correctAnswer": "B",
+                "explanation": "Surge así la tendencia a disociar del yo cuanto pueda convertirse en fuente de displacer, a expulsarlo de sí, a formar un yo puramente hedónico, un yo placiente, enfrentado con un no-yo, con un «afuera» ajeno y amenazante. [15]"
+            },
+            {
+                "question": "¿Qué afirmación es FALSA respecto a la religión, comparada con el arte?",
+                "options": {
+                    "A": "El arte elige la sublimación, mientras que la religión opta por la represión y la regresión.",
+                    "B": "La religión es vista como una ilusión necesaria en el desarrollo de la civilización.",
+                    "C": "El sentimiento religioso es una ilusión de carácter infantil basada en un intenso deseo de protección.",
+                    "D": "El arte proporciona un refugio fugaz, pero la religión ofrece una protección completa contra el sufrimiento."
+                },
+                "correctAnswer": "D",
+                "explanation": "La ligera narcosis en que nos sumerge el arte solo proporciona un refugio fugaz ante los azares de la existencia y carece de poderío suficiente como para hacernos olvidar la miseria real. [16] / Tampoco la religión puede cumplir sus promesas... [17]"
+            },
+            {
+                "question": "En el contexto de la Terapia Psicoanalítica, ¿qué implica la técnica de la 'Cura por el habla' (*Talking Cure*) utilizada por Breuer y Anna O.?",
+                "options": {
+                    "A": "La eliminación de la histeria mediante hipnosis y sugestión.",
+                    "B": "El relato de hechos traumáticos para aliviar la angustia de los síntomas, siendo precursora de la asociación libre.",
+                    "C": "La descarga de afecto mediante la presión en la frente.",
+                    "D": "La interpretación de los sueños para acceder al material psíquico."
+                },
+                "correctAnswer": "B",
+                "explanation": "TALKING CURE (BREUER. ANNA O): El relato de hechos traumáticos parecía aliviar la angustia a los síntomas. [18]"
+            },
+            {
+                "question": "¿Cuál es la etapa del desarrollo psicosexual caracterizada por la desexualización de las relaciones de objeto y la canalización del placer hacia el mundo exterior (aprendizaje y amigos)?",
+                "options": {
+                    "A": "Fase Fálica.",
+                    "B": "Fase Oral Canibalística.",
+                    "C": "Período de Latencia.",
+                    "D": "Fase Genital."
+                },
+                "correctAnswer": "C",
+                "explanation": "Desexualización de las relaciones de objeto y de los sentimientos. El placer se vuelca al mundo exterior. [6, 7], [19]"
+            },
+            {
+                "question": "Respecto a la agresividad, ¿qué sucede cuando la cultura logra internalizarla en el individuo?",
+                "options": {
+                    "A": "La agresión es dirigida hacia el mundo exterior y se descarga en individuos extraños.",
+                    "B": "La agresión es introyectada, dirigida contra el propio Yo y se incorpora al Superyó como 'conciencia'.",
+                    "C": "La agresión se sublima en actividades artísticas y científicas.",
+                    "D": "La agresión desaparece, ya que el hombre es bueno de corazón."
+                },
+                "correctAnswer": "B",
+                "explanation": "La agresión es introyectada, internalizada, devuelta en realidad al lugar de donde procede: es dirigida contra el propio yo, incorporándose a una parte de éste, que en calidad de super-yo se opone a la parte restante, y asumiendo la función de $\\ll$conciencia$\\gg$. [20]"
+            },
+            {
+                "question": "¿Qué concepto topográfico es descrito como 'regido por el proceso secundario y en él se encuentran los contenidos susceptibles a conciencia'?",
+                "options": {
+                    "A": "El Inconsciente.",
+                    "B": "La Conciencia.",
+                    "C": "El Preconsciente.",
+                    "D": "El Ello."
+                },
+                "correctAnswer": "C",
+                "explanation": "El preconsciente está regido por el proceso secundario y en él se encuentran los contenidos susceptibles a conciencia. [21, 22]"
+            },
+            {
+                "question": "Según Freud, ¿cuáles son las dos 'poderosas instancias' (Eros y otra) que se convirtieron en los padres de la cultura humana?",
+                "options": {
+                    "A": "Eros y Tánatos.",
+                    "B": "Yo y Superyó.",
+                    "C": "Eros y Ananké (Necesidad).",
+                    "D": "Principio de placer y Principio de realidad."
+                },
+                "correctAnswer": "C",
+                "explanation": "De tal manera, Eros y Ananké (amor y necesidad) se convirtieron en los padres de la cultura humana, cuyo primer resultado fue el de facilitar la vida en común a mayor número de seres. [23]"
+            },
+            {
+                "question": "¿Qué significa el término 'Libido' en la teoría pulsional freudiana?",
+                "options": {
+                    "A": "El patrón de comportamiento innato y fijo.",
+                    "B": "La fuerza biológica que busca la autoconservación.",
+                    "C": "La energía psíquica asociada a la pulsión de vida y vinculada a la energía sexual.",
+                    "D": "El concepto fronterizo entre lo somático y lo psíquico."
+                },
+                "correctAnswer": "C",
+                "explanation": "LIBIDO: energía psíquica asociada a la pulsión de vida, vincularla a la energía sexual inicialmente. [24, 25]"
+            },
+            {
+                "question": "En el contexto de las tres 'heridas narcisistas' que la ciencia infligió a la humanidad, ¿cuál corresponde a la 'Herida Psicológica' introducida por Freud?",
+                "options": {
+                    "A": "La teoría heliocéntrica de Copérnico (la Tierra no es el centro del universo).",
+                    "B": "La teoría de la evolución de Darwin (el hombre comparte origen con otros animales).",
+                    "C": "El descubrimiento del inconsciente y la influencia de fuerzas irracionales y no conscientes en la mente humana.",
+                    "D": "La teoría de la relatividad de Einstein."
+                },
+                "correctAnswer": "C",
+                "explanation": "HERIDA PSICOLÓGICA: descubrimiento del inconsciente de Freud, la mente humana influenciada por fuerzas irracionales y no conscientes. [18, 26]"
+            },
+            {
+                "question": "¿Cuál es la principal diferencia entre el sentimiento de culpabilidad originado por el 'miedo a la autoridad' (fase inicial) y el originado por el 'miedo al Superyó' (fase posterior)?",
+                "options": {
+                    "A": "El primero es consciente y el segundo es inconsciente.",
+                    "B": "El primero obliga a la renuncia instintual; el segundo impulsa al castigo ya que la intención de la mala acción no puede ocultarse.",
+                    "C": "El primero se refiere al Yo, y el segundo se refiere al Ello.",
+                    "D": "El primero es una reacción ante la pérdida de amor, y el segundo es una reacción ante la represión."
+                },
+                "correctAnswer": "B",
+                "explanation": "Originalmente, la renuncia instintual es una consecuencia del temor a la autoridad exterior... Pero no sucede lo mismo con el miedo al super-yo. Aquí no basta la renuncia a la satisfacción de los instintos, pues el deseo correspondiente persiste y no puede ser ocultado ante el super-yo. En consecuencia, no dejará de surgir el sentimiento de culpabilidad, pese a la renuncia cumplida... [27], [28]"
+            },
+            {
+                "question": "Según el dualismo pulsional de 1920 (Eros y Tánatos), ¿cuál es el instinto que tiende a disolver las unidades y retornar al estado más primitivo e inorgánico?",
+                "options": {
+                    "A": "El Eros.",
+                    "B": "La libido objetal.",
+                    "C": "La pulsión de autoconservación.",
+                    "D": "La pulsión de muerte (Tánatos)."
+                },
+                "correctAnswer": "D",
+                "explanation": "deduje que, además del instinto que tiende a conservar la sustancia viva... debía existir otro, antagónico de aquél, que tendiese a disolver estas unidades y a retornarlas al estado más primitivo, inorgánico. De modo que además del Eros habría un instinto de muerte... [29]"
+            },
+            {
+                "question": "¿Cómo se define el sentimiento 'oceánico' que el amigo de Freud le atribuye como fuente última de la religiosidad?",
+                "options": {
+                    "A": "Un sentimiento de indisoluble comunión con el yo interno.",
+                    "B": "Una 'sensación de eternidad', un sentimiento como de algo sin límites ni barreras, en cierto modo 'oceánico'.",
+                    "C": "La nostalgia por la figura paterna protectora.",
+                    "D": "El miedo al destino y la angustia ante la omnipotencia de la naturaleza."
+                },
+                "correctAnswer": "B",
+                "explanation": "un sentimiento que le agradaría designar $\\ll$sensación de eternidad$\\gg$; un sentimiento como de algo sin límites ni barreras, en cierto modo $\\ll$oceánico$\\gg$. [30]"
+            },
+            {
+                "question": "¿Por qué considera Freud que la hipótesis psicológica del comunismo (que al abolir la propiedad privada desaparecería la hostilidad) es una vana ilusión?",
+                "options": {
+                    "A": "Porque la agresividad se dirigiría entonces contra las mujeres.",
+                    "B": "Porque el instinto agresivo no es una consecuencia de la propiedad, sino una disposición innata.",
+                    "C": "Porque la cultura no puede funcionar sin la ley y la justicia.",
+                    "D": "Porque al abolir la propiedad, desaparecería también el interés por el trabajo."
+                },
+                "correctAnswer": "B",
+                "explanation": "No me concierne la crítica económica del sistema comunista; [...] pero, en cambio, puedo reconocer como vana ilusión su hipótesis psicológica. [...] El instinto agresivo no es una consecuencia de la propiedad. [31]"
+            }
+        ];
 
         // State variables
         let currentQuestionIndex = 0;
@@ -629,12 +906,20 @@
             currentQuestionIndex = 0;
             score = 0;
             
-            let sourceData = quizType === 'chatty' ? chattyQuizData : quizData;
+            let sourceData;
+            if (quizType === 'chatty') {
+                sourceData = chattyQuizData;
+            } else if (quizType === 'parcial') {
+                sourceData = parcialQuizData;
+            } else { // Default to 'main'
+                sourceData = quizData;
+            }
+            
             userAnswers = new Array(sourceData.length).fill(null);
             
             if (mode === 'random') {
                 shuffledQuestions = [...sourceData].map((q, index) => ({...q, originalIndex: index}))
-                                                 .sort(() => Math.random() - 0.5);
+                                                    .sort(() => Math.random() - 0.5);
             } else {
                 shuffledQuestions = [...sourceData].map((q, index) => ({...q, originalIndex: index}));
             }
@@ -651,7 +936,7 @@
             const currentQuestion = shuffledQuestions[currentQuestionIndex];
             
             progressEl.textContent = `Pregunta ${currentQuestionIndex + 1} de ${shuffledQuestions.length}`;
-            questionTextEl.textContent = currentQuestion.question;
+            questionTextEl.innerHTML = currentQuestion.question; // Use innerHTML to render LaTeX
             
             answersContainerEl.innerHTML = '';
             // Reset state
@@ -848,4 +1133,3 @@
     </script>
 </body>
 </html>
-
